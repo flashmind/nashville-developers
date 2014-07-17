@@ -1,0 +1,21 @@
+<h1>Nashville Developers</h1>
+
+<% if flash[:message].present? %>
+  <h1><%= flash[:message] %></h1>
+<% end %>
+
+<% if current_user %>
+  <h3>Hello, <%= current_user.full_name %></h3>
+<% else %>
+  <%= link_to user_omniauth_authorize_path(provider: :facebook) do %>
+    <%= image_tag 'facebook-login.png' %>
+  <% end %>
+<% end %>
+
+<% if current_user and can? :read, User %>
+  <%= link_to 'Users', users_path %>
+<% end %>
+
+<% if current_user and can? :read, Skill %>
+  <%= link_to 'Skills', skills_path %>
+<% end %>
